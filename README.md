@@ -1,2 +1,3 @@
-# seungkilee-cs.github.io
-My Website
+# seungkilee.com
+
+Currently rebuilding the website
