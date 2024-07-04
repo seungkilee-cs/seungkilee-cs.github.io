@@ -1,3 +1,3 @@
 # seungkilee.com
 
-Currently rebuilding the website
+Revamp of my website, with Vite, React, and Typescript.
