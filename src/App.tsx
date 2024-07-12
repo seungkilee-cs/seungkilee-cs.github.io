@@ -1,27 +1,32 @@
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { FC } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css'
 
-function App() {
+import NavBar from './components/NavBar/NavBar';
+import VinylPlayer from './components/VinylPlayer/VinylPlayer';
 
-  return (
-    <>
-      <div><h2>Seung Ki Lee</h2></div>
+interface AppProps {
+  title: string;
+}
+
+const Home = () => <h2>Home</h2>;
+const Projects = () => <h2>Projects</h2>
+const About = () => <h2>About Me</h2>
+const Blog = () => <h2>Blog</h2>
+
+const App : FC<AppProps> = () => {
+  return(
+    <Router>
       <div>
-        <a href="" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/projects" element={<Projects />} />
+        </Routes>
+        <NavBar />
       </div>
-      <div className="card">
-        <p>
-          Built with Vite + React + Typescript
-        </p>
-      </div>
-    </>
-  )
+    </Router>
+  );
 }
 
 export default App

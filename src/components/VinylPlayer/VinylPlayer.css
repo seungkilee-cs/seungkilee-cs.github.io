@@ -1,0 +1,48 @@
+.vinyl-player-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .record-player {
+    width: 200px;
+    height: 200px;
+    background: gray;
+    position: relative;
+  }
+  
+  .vinyl {
+    width: 150px;
+    height: 150px;
+    background: black;
+    border-radius: 50%;
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .vinyl.spin {
+    animation: spin 2s ease-in-out forwards;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: translateY(-200px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  .navbar {
+    margin: 20px 0;
+  }
+  
+  .navbar button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
