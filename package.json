@@ -12,6 +12,7 @@
     "branch-deploy": "./git-branch-deploy.sh"
   },
   "dependencies": {
+    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.13",
     "lucide-react": "^0.544.0",
@@ -22,7 +23,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
+    "@tailwindcss/postcss": "^4.1.13",
     "@types/node": "^20.19.16",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -32,7 +33,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.1.6",
     "prettier": "^3.6.2",
-    "tailwindcss": "^4",
+    "tailwindcss": "^4.0.0",
     "typescript": "^5"
   }
 }
