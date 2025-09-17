@@ -1,3 +1,3 @@
 # seungkilee.com
 
-Revamp of my website, with Vite, React, and Typescript.
+A Generic Website built with NextJS + Typescript + Tailwind CSS + Framer Motion
