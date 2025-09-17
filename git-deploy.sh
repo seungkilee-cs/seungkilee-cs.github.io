@@ -44,8 +44,8 @@ else
   # Commit the changes
   git commit -m "$commit_message"
 
-  # Push to main branch
-  git push origin main
+  # Push to master branch (keeping your original branch name)
+  git push origin master
 fi
 
 # Install dependencies if node_modules doesn't exist
@@ -75,7 +75,7 @@ else
   git checkout --orphan gh-pages
   git rm -rf .
   git commit --allow-empty -m "Initial gh-pages commit"
-  git checkout main
+  git checkout master
 fi
 
 # Deploy built files to gh-pages

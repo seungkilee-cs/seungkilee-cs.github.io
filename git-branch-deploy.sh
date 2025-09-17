@@ -34,15 +34,10 @@ read -p "Enter commit message: " commit_message
 
 # Set the commit message, appending the timestamp if empty
 if [ -z "$commit_message" ]; then
-  commit_message="feature-$timestamp"
+  commit_message="autodeploy-$timestamp"
 else
   commit_message="$commit_message-$timestamp"
 fi
-
-# Create the branch name
-branch_name="feature-$timestamp"
-
-echo "📝 Creating feature branch: $branch_name"
 
 # Add all changes to git
 git add .
@@ -50,14 +45,22 @@ git add .
 # Commit the changes
 git commit -m "$commit_message"
 
+# Create the branch name
+branch_name="autodeploy-$timestamp"
+
+echo "📝 Creating feature branch: $branch_name"
+
 # Create a new branch and switch to it
 git checkout -b $branch_name
 
 # Push the new branch to the remote repository
 git push origin $branch_name
 
-# Switch back to the main branch
-git checkout main
+# Switch back to the master branch
+git checkout master
+
+# Merge the new branch into master
+git merge $branch_name
 
 # Install dependencies if node_modules doesn't exist
 if [ ! -d node_modules ]; then
@@ -65,27 +68,20 @@ if [ ! -d node_modules ]; then
   npm ci
 fi
 
-# Build the Next.js application to test
-echo "🏗️  Testing build on main branch..."
+# Build the Next.js application
+echo "🏗️  Building Next.js application..."
 npm run build
 
 # Check if build was successful
 if [ $? -ne 0 ]; then
-  echo "❌ Build failed on main branch! Please fix before merging."
-  git checkout $branch_name
-  echo "🔄 Switched back to feature branch: $branch_name"
-  echo "Fix the issues and run the script again."
+  echo "❌ Build failed! Please fix the errors and try again."
   exit 1
 fi
 
-# Merge the new branch into main
-echo "🔀 Merging $branch_name into main..."
-git merge $branch_name --no-ff -m "Merge feature branch: $branch_name"
+# Push the changes to the master branch at the remote repository
+git push origin master
 
-# Push the changes to the main branch
-git push origin main
-
-# Deploy to GitHub Pages
+# Deploy to GitHub Pages using gh-pages branch
 echo "🚀 Deploying to GitHub Pages..."
 
 # Check if gh-pages branch exists
@@ -96,16 +92,16 @@ else
   git checkout --orphan gh-pages
   git rm -rf .
   git commit --allow-empty -m "Initial gh-pages commit"
-  git checkout main
+  git checkout master
 fi
 
 # Deploy built files to gh-pages
 git subtree push --prefix dist origin gh-pages
 
-# Clean up: Delete the local feature branch
+# Delete the local branch
 git branch -d $branch_name
 
-# Delete the feature branch from the remote repository
+# Delete the branch from the remote repository
 git push origin --delete $branch_name
 
 echo "✅ Feature branch deployment complete!"
