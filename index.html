@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - Interactive Bookshelf</title>
+    <link rel="stylesheet" href="/src/css/landing.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <!-- Landing Page -->
+      <div id="landing-screen" class="screen active">
+        <div class="title-section">
+          <h1>Seung Ki Lee</h1>
+          <p>Software Engineer</p>
+          <button class="get-started-btn">My Shelf</button>
+        </div>
+
+        <div class="room-container">
+          <div class="room-wrapper">
+            <!-- Isometric Room -->
+            <div class="isometric-room">
+              <!-- Floor -->
+              <div class="floor"></div>
+
+              <!-- Walls -->
+              <div class="wall-left"></div>
+              <div class="wall-right"></div>
+
+              <!-- Furniture -->
+              <div class="vinyl-section">
+                <div class="table">
+                  <div class="turntable"></div>
+                </div>
+                <div class="vinyl-shelf"></div>
+              </div>
+
+              <div
+                class="bookshelf-section clickable-zone"
+                data-target="bookshelf"
+              >
+                <div class="bookshelf">
+                  <div class="shelf-1"></div>
+                  <div class="shelf-2"></div>
+                  <div class="shelf-3"></div>
+                  <div class="shelf-4"></div>
+                  <div class="books-row-1"></div>
+                  <div class="books-row-2"></div>
+                  <div class="books-row-3"></div>
+                  <div class="books-row-4"></div>
+                </div>
+              </div>
+
+              <div class="chair"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bookshelf Screen (hidden initially) -->
+      <div id="bookshelf-screen" class="screen">
+        <div class="bookshelf-container">
+          <!-- Perspective bookshelf will go here -->
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/js/main.js"></script>
+  </body>
+</html>

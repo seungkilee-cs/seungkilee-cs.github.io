@@ -1,0 +1,350 @@
+/* CSS Custom Properties */
+:root {
+  --primary-font: "Fira Code", monospace;
+  --bg-color: #f5f5f0;
+  --room-color: #e8e3d8;
+  --wood-color: #d4b896;
+  --dark-wood: #b8935f;
+  --bookshelf-color: #c4a675;
+  --book-colors: #8b4513, #2e4057, #4a6741, #7d4f39, #5d4e37;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--primary-font);
+  background: var(--bg-color);
+  overflow: hidden;
+  height: 100vh;
+}
+
+.screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.8s ease-in-out;
+}
+
+.screen.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Landing Screen Layout */
+#landing-screen {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 2rem;
+  gap: 4rem;
+}
+
+/* Title Section */
+.title-section {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.title-section h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #2c2c2c;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.title-section p {
+  font-size: 1.2rem;
+  color: #666;
+  font-weight: 300;
+}
+
+.get-started-btn {
+  background: #2c2c2c;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-family: var(--primary-font);
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.get-started-btn:hover {
+  background: #1a1a1a;
+  transform: translateY(-2px);
+}
+
+/* Room Container */
+.room-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.room-wrapper {
+  transform: scale(0.8);
+  transform-origin: center;
+}
+
+/* Isometric Room - Base */
+.isometric-room {
+  position: relative;
+  width: 500px;
+  height: 400px;
+  transform: rotateX(45deg) rotateY(-15deg);
+  transform-style: preserve-3d;
+}
+
+/* Floor */
+.floor {
+  position: absolute;
+  width: 500px;
+  height: 400px;
+  background: var(--room-color);
+  transform: rotateX(-90deg) translateZ(-50px);
+  border: 2px solid #d0cbc0;
+}
+
+/* Walls */
+.wall-left {
+  position: absolute;
+  width: 400px;
+  height: 300px;
+  background: linear-gradient(to bottom, #f0ebe0 0%, #e8e3d8 100%);
+  transform: rotateY(90deg) translateZ(0px);
+  border-right: 2px solid #d0cbc0;
+}
+
+.wall-right {
+  position: absolute;
+  width: 500px;
+  height: 300px;
+  background: linear-gradient(to bottom, #f0ebe0 0%, #e8e3d8 100%);
+  transform: translateZ(400px);
+  border: 2px solid #d0cbc0;
+  border-bottom: none;
+}
+
+/* Vinyl Section */
+.vinyl-section {
+  position: absolute;
+  left: 50px;
+  bottom: 50px;
+  transform-style: preserve-3d;
+}
+
+.table {
+  width: 120px;
+  height: 80px;
+  background: var(--wood-color);
+  border: 2px solid var(--dark-wood);
+  transform: translateZ(60px);
+  position: relative;
+}
+
+.turntable {
+  width: 60px;
+  height: 60px;
+  background: #333;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  left: 30px;
+  border: 2px solid #222;
+}
+
+.turntable::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: #000;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.vinyl-shelf {
+  width: 100px;
+  height: 20px;
+  background: var(--wood-color);
+  border: 2px solid var(--dark-wood);
+  transform: translateZ(150px) translateY(-120px);
+  position: relative;
+}
+
+/* Bookshelf Section - Main Interactive Element */
+.bookshelf-section {
+  position: absolute;
+  right: 50px;
+  bottom: 50px;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bookshelf-section:hover {
+  transform: scale(1.05);
+}
+
+.bookshelf-section.clickable-zone {
+  position: relative;
+}
+
+.bookshelf-section::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.bookshelf-section:hover::before {
+  opacity: 1;
+}
+
+.bookshelf {
+  width: 120px;
+  height: 200px;
+  background: var(--bookshelf-color);
+  border: 2px solid var(--dark-wood);
+  transform: translateZ(50px);
+  position: relative;
+}
+
+/* Bookshelf Shelves */
+.shelf-1,
+.shelf-2,
+.shelf-3,
+.shelf-4 {
+  position: absolute;
+  width: 100%;
+  height: 8px;
+  background: var(--dark-wood);
+  border-top: 1px solid #9e7b47;
+}
+
+.shelf-1 {
+  top: 40px;
+}
+.shelf-2 {
+  top: 80px;
+}
+.shelf-3 {
+  top: 120px;
+}
+.shelf-4 {
+  top: 160px;
+}
+
+/* Books on Shelves */
+.books-row-1,
+.books-row-2,
+.books-row-3,
+.books-row-4 {
+  position: absolute;
+  width: 100%;
+  height: 35px;
+  display: flex;
+}
+
+.books-row-1 {
+  top: 5px;
+}
+.books-row-2 {
+  top: 45px;
+}
+.books-row-3 {
+  top: 85px;
+}
+.books-row-4 {
+  top: 125px;
+}
+
+/* Create individual books */
+.books-row-1::before,
+.books-row-2::before,
+.books-row-3::before,
+.books-row-4::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    #8b4513 0%,
+    #8b4513 20%,
+    #2e4057 20%,
+    #2e4057 35%,
+    #4a6741 35%,
+    #4a6741 55%,
+    #7d4f39 55%,
+    #7d4f39 75%,
+    #5d4e37 75%,
+    #5d4e37 100%
+  );
+}
+
+/* Chair */
+.chair {
+  position: absolute;
+  right: 200px;
+  bottom: 100px;
+  width: 60px;
+  height: 80px;
+  background: #f5f5f5;
+  border: 2px solid #ddd;
+  transform: translateZ(40px);
+  border-radius: 4px;
+}
+
+.chair::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: #f5f5f5;
+  border: 2px solid #ddd;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #landing-screen {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 2rem;
+  }
+
+  .title-section h1 {
+    font-size: 2.5rem;
+  }
+
+  .room-wrapper {
+    transform: scale(0.6);
+  }
+}
