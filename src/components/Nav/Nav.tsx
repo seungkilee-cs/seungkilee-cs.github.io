@@ -5,7 +5,7 @@ export function Nav() {
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
-        <div className={styles.brand}>username</div>
+        <div className={styles.brand}>Seung Ki Lee</div>
         <div className={styles.links}>
           <NavLink
             to="/"

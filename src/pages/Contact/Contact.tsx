@@ -4,29 +4,30 @@ export function Contact() {
   return (
     <section className={styles.section}>
       <h1 className={styles.title}>Contact</h1>
-      <p className={styles.lead}>Reach out anytime.</p>
+      <p className={styles.lead}>Let's Connect! Reach out anytime.</p>
       <ul className={styles.list}>
         <li>
-          Email: <a href="mailto:hello@example.com">hello@example.com</a>
+          Email:{" "}
+          <a href="mailto:seungkilee.cs@gmail.com">seungkilee.cs@gmail.com</a>
         </li>
         <li>
           GitHub:{" "}
           <a
-            href="https://github.com/username"
+            href="https://github.com/seungkilee-cs"
             target="_blank"
             rel="noopener noreferrer"
           >
-            username
+            seungkilee-cs
           </a>
         </li>
         <li>
           LinkedIn:{" "}
           <a
-            href="https://linkedin.com/in/username"
+            href="https://linkedin.com/in/seungkilee"
             target="_blank"
             rel="noopener noreferrer"
           >
-            /in/username
+            /in/seungkilee
           </a>
         </li>
       </ul>

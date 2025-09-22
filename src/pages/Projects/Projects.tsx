@@ -9,21 +9,36 @@ type Project = {
 
 const projects: Project[] = [
   {
-    title: "Minimal Portfolio",
-    description: "SPA build with a11y-first, ~30KB gzipped.",
-    github: "https://github.com/username/username.github.io",
-    demo: "https://username.github.io",
+    title: "Spektra",
+    description: "Audio Spectrum Analyzer hosted on the Web",
+    github: "https://github.com/seungkilee-cs/Spektra",
+    demo: "https://www.seungkilee.com/Spektra/",
   },
   {
-    title: "Weather Lite",
-    description: "1s FCP on 3G, clean map overlays.",
-    github: "https://github.com/username/weather-lite",
-    demo: "https://username.github.io/weather-lite",
+    title: "MiniMeet",
+    description:
+      "Real Time Video Chat Application built with Full Stack TypeScript and WebSocket",
+    github: "https://github.com/seungkilee-cs/MiniMeet",
+    demo: "https://github.com/username/weather-lite",
   },
   {
-    title: "Tasks Mini",
-    description: "Zero-config, keyboard-first flow.",
-    github: "https://github.com/username/tasks-mini",
+    title: "K-Means Image Compression",
+    description: "Image compression implemented with K-Means Clustering",
+    github: "https://github.com/seungkilee-cs/K-Means-Image-Compression",
+    demo: "https://github.com/seungkilee-cs/MiniMeet",
+  },
+  {
+    title: "Financial Modeling",
+    description:
+      "Some interesting financial modeling done in python and TypeScript",
+    github: "https://github.com/seungkilee-cs/Financial-Modeling",
+    demo: "https://github.com/seungkilee-cs/Financial-Modeling",
+  },
+  {
+    title: "QR-Zenerate",
+    description: "URL to QR Code Extension for Zen Browser",
+    github: "https://github.com/seungkilee-cs/QR-Zenerate",
+    demo: "https://github.com/seungkilee-cs/QR-Zenerate",
   },
 ];
 
