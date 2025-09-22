@@ -1,109 +1,128 @@
 #!/usr/bin/env bash
+# Feature-branch build-and-deploy to gh-pages (static) with automated merge
+# Intended for a Vite/React SPA (dist output). Adjust build command if needed.
 
-# Next.js GitHub Pages deployment with feature branch workflow
+set -euo pipefail
 
-set -e # Exit on any error
+# Config
+DEFAULT_BRANCH="${DEFAULT_BRANCH:-master}"
+BUILD_DIR="${BUILD_DIR:-dist}"
+REMOTE_NAME="${REMOTE_NAME:-origin}"
 
-echo "🚀 Starting Next.js feature branch deployment..."
+echo "Starting feature-branch deployment..."
 
-# Check if the current directory is a git repository
-if [ ! -d .git ] && ! git rev-parse --git-dir >/dev/null 2>&1; then
-  echo "❌ This is not a git repository. The script will not run."
+# Preconditions
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  echo "Error: Not a git repository."
   exit 1
 fi
 
-echo "✅ Git repository detected"
-
-# Check if package.json exists
 if [ ! -f package.json ]; then
-  echo "❌ package.json not found. Make sure you're in a Next.js project directory."
+  echo "Error: package.json not found. Run this in the project root."
   exit 1
 fi
 
-# Get the current timestamp
-timestamp=$(date +"%Y-%m-%d_%H_%M_%S")
+# Verify default branch exists locally
+if ! git show-ref --verify --quiet "refs/heads/${DEFAULT_BRANCH}"; then
+  echo "Error: Default branch '${DEFAULT_BRANCH}' not found locally."
+  exit 1
+fi
 
-# Check if there are any changes that have not been staged
+# Sync default branch
+git fetch --all --prune
+git checkout "${DEFAULT_BRANCH}"
+git pull --ff-only "${REMOTE_NAME}" "${DEFAULT_BRANCH}"
+
+# Detect changes
 if [ -z "$(git status --porcelain)" ]; then
-  echo "❌ No new changes to commit. Exiting."
-  exit 1
-fi
-
-# Prompt the user for a commit message
-read -p "Enter commit message: " commit_message
-
-# Set the commit message, appending the timestamp if empty
-if [ -z "$commit_message" ]; then
-  commit_message="autodeploy-$timestamp"
+  echo "No new changes to commit in working tree."
 else
-  commit_message="$commit_message-$timestamp"
+  # Commit changes
+  read -r -p "Enter commit message (leave empty to auto-generate): " commit_message
+  timestamp="$(date +'%Y-%m-%d_%H_%M_%S')"
+  if [ -z "${commit_message}" ]; then
+    commit_message="autodeploy-${timestamp}"
+  else
+    commit_message="${commit_message}-${timestamp}"
+  fi
+
+  git add -A
+  git commit -m "${commit_message}"
 fi
 
-# Add all changes to git
-git add .
+# Create and push a temporary feature branch
+timestamp="$(date +'%Y-%m-%d_%H_%M_%S')"
+branch_name="autodeploy-${timestamp}"
+echo "Creating feature branch: ${branch_name}"
+git checkout -b "${branch_name}"
+git push -u "${REMOTE_NAME}" "${branch_name}"
 
-# Commit the changes
-git commit -m "$commit_message"
+# Merge back into default branch (fast-forward if possible)
+git checkout "${DEFAULT_BRANCH}"
+# Try fast-forward, else a regular merge; fail if conflicts
+if git merge --ff-only "${branch_name}"; then
+  echo "Fast-forward merge completed."
+else
+  echo "Non fast-forward merge required; attempting a no-ff merge."
+  git merge --no-edit "${branch_name}"
+fi
 
-# Create the branch name
-branch_name="autodeploy-$timestamp"
-
-echo "📝 Creating feature branch: $branch_name"
-
-# Create a new branch and switch to it
-git checkout -b $branch_name
-
-# Push the new branch to the remote repository
-git push origin $branch_name
-
-# Switch back to the master branch
-git checkout master
-
-# Merge the new branch into master
-git merge $branch_name
-
-# Install dependencies if node_modules doesn't exist
+# Install deps if needed
 if [ ! -d node_modules ]; then
-  echo "📦 Installing dependencies..."
+  echo "Installing dependencies..."
   npm ci
 fi
 
-# Build the Next.js application
-echo "🏗️  Building Next.js application..."
+# Build
+echo "Building project..."
 npm run build
 
-# Check if build was successful
-if [ $? -ne 0 ]; then
-  echo "❌ Build failed! Please fix the errors and try again."
+if [ ! -d "${BUILD_DIR}" ]; then
+  echo "Error: build directory '${BUILD_DIR}' not found after build."
   exit 1
 fi
 
-# Push the changes to the master branch at the remote repository
-git push origin master
+# Push default branch
+git push "${REMOTE_NAME}" "${DEFAULT_BRANCH}"
 
-# Deploy to GitHub Pages using gh-pages branch
-echo "🚀 Deploying to GitHub Pages..."
-
-# Check if gh-pages branch exists
-if git show-ref --verify --quiet refs/heads/gh-pages; then
-  echo "✅ gh-pages branch exists"
+# Ensure gh-pages exists remotely (create if missing)
+if git ls-remote --exit-code --heads "${REMOTE_NAME}" gh-pages >/dev/null 2>&1; then
+  echo "gh-pages exists on remote."
 else
-  echo "🆕 Creating gh-pages branch..."
+  echo "Creating gh-pages branch (empty initial commit) on remote..."
+  tmpdir="$(mktemp -d)"
+  git worktree add "${tmpdir}" --detach
+  pushd "${tmpdir}" >/dev/null
   git checkout --orphan gh-pages
-  git rm -rf .
+  rm -rf ./*
   git commit --allow-empty -m "Initial gh-pages commit"
-  git checkout master
+  git push "${REMOTE_NAME}" gh-pages
+  popd >/dev/null
+  git worktree remove --force "${tmpdir}"
 fi
 
-# Deploy built files to gh-pages
-git subtree push --prefix dist origin gh-pages
+# Deploy build to gh-pages using subtree (safer alternative commands below)
+echo "Deploying ${BUILD_DIR} to gh-pages..."
+# Ensure working tree clean for subtree
+if [ -n "$(git status --porcelain)" ]; then
+  echo "Error: working tree dirty. Commit or stash changes and retry."
+  exit 1
+fi
 
-# Delete the local branch
-git branch -d $branch_name
+# Add subtree if not present; subtree push can fail if history changed; retry advice printed on error
+set +e
+git subtree push --prefix "${BUILD_DIR}" "${REMOTE_NAME}" gh-pages
+status=$?
+set -e
+if [ $status -ne 0 ]; then
+  echo "subtree push failed. Trying split+push fallback..."
+  commit_ref="$(git subtree split --prefix "${BUILD_DIR}" "${DEFAULT_BRANCH}")"
+  git push "${REMOTE_NAME}" "${commit_ref}:refs/heads/gh-pages"
+fi
 
-# Delete the branch from the remote repository
-git push origin --delete $branch_name
+# Cleanup feature branch locally and remote
+echo "Cleaning up feature branch: ${branch_name}"
+git branch -D "${branch_name}" 2>/dev/null || true
+git push "${REMOTE_NAME}" --delete "${branch_name}" 2>/dev/null || true
 
-echo "✅ Feature branch deployment complete!"
-echo "🗑️  Cleaned up feature branch: $branch_name"
-echo "🌐 Your site should be available shortly on GitHub Pages."
+echo "Deployment complete. Pages will update shortly."
