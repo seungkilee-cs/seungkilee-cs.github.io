@@ -1,9 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap");
+
 :root {
-  --bg: #ffffff;
-  --fg: #111213;
-  --subtle: #6b7280;
-  --accent: #4f46e5;
-  --card: #f8fafc;
+  /* Neutrals */
+  --bg: #f9fafb; /* soft gray-white background */
+  --panel: #ffffff; /* cards/surfaces */
+  --ink: #0f172a; /* near-black text */
+  --muted: #64748b; /* secondary text */
+
+  /* Accent */
+  --accent: #4f46e5; /* indigo */
+  --accent-ink: #eef2ff;
+
+  /* Borders/Shadows */
+  --line: #e5e7eb;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+
+  /* Type scale (base 16px, modular ratio ~1.25) */
+  --fs-1: clamp(2.25rem, 5vw, 3rem); /* H1 */
+  --fs-2: clamp(1.5rem, 3.5vw, 2rem); /* H2 */
+  --fs-3: 1.25rem; /* H3/lead */
+  --fs-body: 1rem; /* 16px */
+
+  --radius: 14px;
+  --radius-sm: 10px;
+  --pad: 1rem;
+  --pad-lg: 2rem;
 }
 
 * {
@@ -12,6 +34,9 @@
   padding: 0;
 }
 html {
+  font-size: 16px;
+}
+body {
   font-family:
     Inter,
     ui-sans-serif,
@@ -21,13 +46,29 @@ html {
     Roboto,
     Arial,
     sans-serif;
-}
-body {
   background: var(--bg);
-  color: var(--fg);
-  line-height: 1.6;
+  color: var(--ink);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 a {
   color: inherit;
   text-decoration: none;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
 }

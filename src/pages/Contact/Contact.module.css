@@ -1,15 +1,36 @@
 .section {
   display: grid;
   gap: 1rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: clamp(1.25rem, 3vw, 2rem);
 }
+
 .title {
-  font-size: 2rem;
-  font-weight: 700;
+  font-family: "Playfair Display", serif;
+  font-size: var(--fs-2);
 }
+
 .lead {
-  color: var(--subtle);
+  color: var(--muted);
 }
+
 .list {
   display: grid;
-  gap: 0.25rem;
+  gap: 0.5rem;
+}
+
+.list a {
+  color: var(--accent);
+  border-bottom: 1px solid transparent;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.list a:hover {
+  color: var(--ink);
+  border-color: var(--accent);
 }

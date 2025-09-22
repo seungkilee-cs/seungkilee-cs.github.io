@@ -10,19 +10,19 @@ type Project = {
 const projects: Project[] = [
   {
     title: "Minimal Portfolio",
-    description: "This site. React + TS + Vite + Router.",
+    description: "SPA build with a11y-first, ~30KB gzipped.",
     github: "https://github.com/username/username.github.io",
     demo: "https://username.github.io",
   },
   {
     title: "Weather Lite",
-    description: "Tiny weather dashboard with clean UI.",
+    description: "1s FCP on 3G, clean map overlays.",
     github: "https://github.com/username/weather-lite",
     demo: "https://username.github.io/weather-lite",
   },
   {
     title: "Tasks Mini",
-    description: "Simple tasks app, zero fluff.",
+    description: "Zero-config, keyboard-first flow.",
     github: "https://github.com/username/tasks-mini",
   },
 ];

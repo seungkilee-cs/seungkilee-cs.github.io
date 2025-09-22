@@ -64,11 +64,11 @@ if [ ! -d "${BUILD_DIR}" ]; then
   exit 1
 fi
 
-# Ensure gh-pages exists remotely (create if missing)
+# Ensure gh-pages exists remotely (create if missing) using an orphan branch once
 if git ls-remote --exit-code --heads "${REMOTE_NAME}" gh-pages >/dev/null 2>&1; then
   echo "gh-pages exists on remote."
 else
-  echo "Creating gh-pages branch (empty initial commit) on remote..."
+  echo "Creating gh-pages branch (orphan) on remote..."
   tmpdir="$(mktemp -d)"
   git worktree add "${tmpdir}" --detach
   pushd "${tmpdir}" >/dev/null
@@ -80,21 +80,29 @@ else
   git worktree remove --force "${tmpdir}"
 fi
 
-# Deploy build to gh-pages
-echo "Deploying ${BUILD_DIR} to gh-pages..."
-if [ -n "$(git status --porcelain)" ]; then
-  echo "Error: working tree dirty. Commit or stash changes and retry."
-  exit 1
+# Publish dist via a worktree checked out to gh-pages
+PUB_DIR="$(mktemp -d)"
+echo "Adding worktree for gh-pages at ${PUB_DIR}"
+git worktree add "${PUB_DIR}" gh-pages
+
+rsync -av --delete "${BUILD_DIR}/" "${PUB_DIR}/" --exclude ".git"
+
+pushd "${PUB_DIR}" >/dev/null
+
+# SPA 404 fallback
+if [ -f index.html ] && [ ! -f 404.html ]; then
+  cp index.html 404.html
 fi
 
-set +e
-git subtree push --prefix "${BUILD_DIR}" "${REMOTE_NAME}" gh-pages
-status=$?
-set -e
-if [ $status -ne 0 ]; then
-  echo "subtree push failed. Trying split+push fallback..."
-  commit_ref="$(git subtree split --prefix "${BUILD_DIR}" "${DEFAULT_BRANCH}")"
-  git push "${REMOTE_NAME}" "${commit_ref}:refs/heads/gh-pages"
+if [ -n "$(git status --porcelain)" ]; then
+  git add -A
+  git commit -m "Publish ${BUILD_DIR} $(date +'%Y-%m-%d_%H_%M_%S')"
+  git push "${REMOTE_NAME}" gh-pages
+else
+  echo "No changes to publish on gh-pages."
 fi
+
+popd >/dev/null
+git worktree remove --force "${PUB_DIR}"
 
 echo "Deployment complete. Pages will update shortly."

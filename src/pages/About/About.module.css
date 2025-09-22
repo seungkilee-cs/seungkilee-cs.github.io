@@ -1,11 +1,22 @@
 .section {
   display: grid;
   gap: 1rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: clamp(1.25rem, 3vw, 2rem);
 }
+
 .title {
-  font-size: 2rem;
-  font-weight: 700;
+  font-family: "Playfair Display", serif;
+  font-size: var(--fs-1);
+  line-height: 1.15;
+  margin-bottom: 0.25rem;
 }
+
 .lead {
-  color: var(--subtle);
+  color: var(--muted);
+  font-size: var(--fs-3);
+  margin-bottom: 0.5rem;
 }

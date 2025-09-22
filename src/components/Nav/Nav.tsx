@@ -31,6 +31,15 @@ export function Nav() {
           >
             Contact
           </NavLink>
+
+          <NavLink
+            to="/blog"
+            className={({ isActive }) =>
+              isActive ? `${styles.link} ${styles.active}` : styles.link
+            }
+          >
+            Blog
+          </NavLink>
         </div>
       </nav>
     </header>
