@@ -1,8 +1,10 @@
+/* Layout wrapper */
 .wrapper {
   display: grid;
   gap: 1.25rem;
 }
 
+/* Card-like sections */
 .section {
   display: grid;
   gap: 0.6rem;
@@ -13,6 +15,7 @@
   box-shadow: var(--shadow-sm, 0 1px 2px rgba(15, 23, 42, 0.06));
 }
 
+/* Headings and text */
 .title {
   font-family: "Playfair Display", serif;
   font-size: var(--fs-1, clamp(2.25rem, 5vw, 3rem));
@@ -40,47 +43,81 @@
   color: var(--muted, #64748b);
 }
 
-/* Badge list (tools) */
-.badgeList {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  padding: 0;
+/* Shared pill geometry */
+:root {
+  --pill-h: 36px;
+  --pill-pad-x: 12px;
+  --pill-gap: 8px;
+}
+
+/* Tools: accent pills with icon and "Type | Name" */
+.toolList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.6rem;
   margin-top: 0.25rem;
 }
 
-.badge {
+.toolPill {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  color: var(--accent, #4f46e5);
-  background: #eef2ff;
-  border: 1px solid rgba(79, 70, 229, 0.25);
+  height: var(--pill-h);
+  gap: var(--pill-gap);
+  padding: 0 var(--pill-pad-x);
   border-radius: 999px;
-  padding: 0.4rem 0.7rem;
-  font-weight: 600;
+  border: 1px solid rgba(79, 70, 229, 0.25);
+  background: #eef2ff;
+  color: var(--accent, #4f46e5);
+  text-decoration: none;
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(15, 23, 42, 0.06));
   transition:
     background-color 0.2s ease,
     color 0.2s ease,
-    transform 0.15s ease;
+    transform 0.15s ease,
+    border-color 0.2s ease;
 }
 
-.badge:hover {
+.toolPill:hover {
   background: var(--accent, #4f46e5);
   color: var(--accent-ink, #eef2ff);
   transform: translateY(-1px);
+  border-color: transparent;
 }
 
-.badgeIcon {
+.toolPill:focus-visible {
+  outline: 2px solid var(--accent, #4f46e5);
+  outline-offset: 2px;
+}
+
+.toolIcon {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+}
+
+.toolLabel {
   display: inline-flex;
-}
-
-.badgeText {
+  align-items: baseline;
+  gap: 6px;
   line-height: 1;
+  font-weight: 600;
 }
 
-/* Stack tags */
+.toolType {
+  color: var(--muted, #64748b);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.toolSep {
+  opacity: 0.6;
+}
+
+.toolName {
+  font-weight: 700;
+}
+
+/* Stack tags: neutral pills */
 .tags {
   display: grid;
   gap: 1rem;
@@ -97,17 +134,36 @@
   gap: 0.5rem;
 }
 
-.tag {
+.tagPill {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  gap: 6px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
   background: #f3f4f6;
   color: #374151;
-  border: 1px solid #e5e7eb;
-  border-radius: 999px;
-  padding: 0.35rem 0.7rem;
   font-weight: 600;
   font-size: 0.95rem;
+  transition:
+    transform 0.15s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
-/* GitHub commits */
+.tagPill:hover {
+  transform: translateY(-1px);
+  background: #eef2f7;
+  border-color: #e5e7eb;
+}
+
+.tagPill:focus-visible {
+  outline: 2px solid var(--accent, #4f46e5);
+  outline-offset: 2px;
+}
+
+/* Optional: Recent GitHub Activity list (kept if enabled) */
 .commitList {
   list-style: none;
   padding: 0;
@@ -174,4 +230,113 @@
   background: var(--accent, #4f46e5);
   color: var(--accent-ink, #eef2ff);
   transform: translateY(-1px);
+}
+
+.pill:focus-visible {
+  outline: 2px solid var(--accent, #4f46e5);
+  outline-offset: 2px;
+}
+
+/* Contributions block (if re-enabled later) */
+.contrib {
+  display: grid;
+  gap: 0.6rem;
+  background: var(--panel, #ffffff);
+  border: 1px solid var(--line, #e5e7eb);
+  border-radius: var(--radius, 14px);
+  padding: clamp(1rem, 2.5vw, 1.25rem);
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(15, 23, 42, 0.06));
+}
+
+.contribHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.contribTitle {
+  font-family: "Playfair Display", serif;
+  font-size: var(--fs-2, clamp(1.5rem, 3.5vw, 2rem));
+  line-height: 1.2;
+}
+
+.contribTotal {
+  color: var(--muted, #64748b);
+  font-size: 0.95rem;
+}
+
+.contribGrid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min-content;
+  gap: 3px;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.contribWeek {
+  display: grid;
+  grid-template-rows: repeat(7, 10px);
+  gap: 3px;
+}
+
+.contribDay {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--contrib-0, #e5e7eb);
+}
+
+.contribDay[data-level="0"] {
+  background: var(--contrib-0, #e5e7eb);
+}
+.contribDay[data-level="1"] {
+  background: var(--contrib-1, #c7d2fe);
+}
+.contribDay[data-level="2"] {
+  background: var(--contrib-2, #a5b4fc);
+}
+.contribDay[data-level="3"] {
+  background: var(--contrib-3, #818cf8);
+}
+.contribDay[data-level="4"] {
+  background: var(--contrib-4, #4f46e5);
+}
+
+.contribLegend {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted, #64748b);
+  font-size: 0.9rem;
+}
+
+.legendSwatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: #e5e7eb;
+}
+
+.legendScale {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.legendScale > span:nth-child(1) {
+  background: var(--contrib-0, #e5e7eb);
+}
+.legendScale > span:nth-child(2) {
+  background: var(--contrib-1, #c7d2fe);
+}
+.legendScale > span:nth-child(3) {
+  background: var(--contrib-2, #a5b4fc);
+}
+.legendScale > span:nth-child(4) {
+  background: var(--contrib-3, #818cf8);
+}
+.legendScale > span:nth-child(5) {
+  background: var(--contrib-4, #4f46e5);
 }

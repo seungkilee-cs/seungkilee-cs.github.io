@@ -42,111 +42,100 @@ export function About() {
 
       {/* Tools */}
       <section className={styles.section}>
-        <h2 className={styles.h2}>Tools</h2>
-        <ul className={styles.badgeList}>
-          <li>
-            <a
-              className={styles.badge}
-              href="https://www.zen-browser.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Zen Browser - download"
-            >
-              <span className={styles.badgeIcon} aria-hidden="true">
-                {/* Inline SVG icon */}
-                <svg
-                  viewBox="0 0 24 24"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                >
-                  <circle cx="12" cy="12" r="10"></circle>
-                </svg>
-              </span>
-              <span className={styles.badgeText}>Zen Browser</span>
-            </a>
-          </li>
-          <li>
-            <a
-              className={styles.badge}
-              href="https://neovim.io/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Neovim - download"
-            >
-              <span className={styles.badgeIcon} aria-hidden="true">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                >
-                  <path d="M6 2l12 8-12 8z"></path>
-                </svg>
-              </span>
-              <span className={styles.badgeText}>Neovim</span>
-            </a>
-          </li>
-          <li>
-            <a
-              className={styles.badge}
-              href="https://ghostty.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Ghostty - download"
-            >
-              <span className={styles.badgeIcon} aria-hidden="true">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                >
-                  <rect x="4" y="5" width="16" height="12" rx="2"></rect>
-                </svg>
-              </span>
-              <span className={styles.badgeText}>Ghostty</span>
-            </a>
-          </li>
-        </ul>
+        <h2 className={styles.h2}>Current Favorite Tools</h2>
+        <div className={styles.toolList}>
+          <a
+            className={styles.toolPill}
+            href="https://ghostty.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Ghostty - download"
+          >
+            <img
+              src="/src/assets/icons/ghostty.svg"
+              alt=""
+              className={styles.toolIcon}
+            />
+            <span className={styles.toolLabel}>
+              <span className={styles.toolType}>Terminal</span>
+              <span className={styles.toolSep}>|</span>
+              <span className={styles.toolName}>Ghostty</span>
+            </span>
+          </a>
+          <a
+            className={styles.toolPill}
+            href="https://neovim.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Neovim - download"
+          >
+            <img
+              src="/src/assets/icons/neovim.svg"
+              alt=""
+              className={styles.toolIcon}
+            />
+            <span className={styles.toolLabel}>
+              <span className={styles.toolType}>Text Editor</span>
+              <span className={styles.toolSep}>|</span>
+              <span className={styles.toolName}>Neovim</span>
+            </span>
+          </a>
+
+          <a
+            className={styles.toolPill}
+            href="https://www.zen-browser.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Zen Browser - download"
+          >
+            <img
+              src="/src/assets/icons/zen.svg"
+              alt=""
+              className={styles.toolIcon}
+            />
+            <span className={styles.toolLabel}>
+              <span className={styles.toolType}>Browser</span>
+              <span className={styles.toolSep}>|</span>
+              <span className={styles.toolName}>Zen</span>
+            </span>
+          </a>
+        </div>
       </section>
 
       {/* Stack */}
-      <section className={styles.section}>
-        <h2 className={styles.h2}>Languages & Stack</h2>
-        <div className={styles.tags}>
-          {/* Languages */}
-          <div className={styles.tagGroup}>
-            <h3 className={styles.h3}>Languages</h3>
-            <div className={styles.tagRow}>
-              <span className={styles.tag}>TypeScript</span>
-              <span className={styles.tag}>JavaScript</span>
-              <span className={styles.tag}>Python</span>
-              <span className={styles.tag}>SQL</span>
-            </div>
-          </div>
-          {/* Frontend */}
-          <div className={styles.tagGroup}>
-            <h3 className={styles.h3}>Frontend</h3>
-            <div className={styles.tagRow}>
-              <span className={styles.tag}>React</span>
-              <span className={styles.tag}>Vite</span>
-              <span className={styles.tag}>CSS Modules</span>
-            </div>
-          </div>
-          {/* Backend/Infra */}
-          <div className={styles.tagGroup}>
-            <h3 className={styles.h3}>Backend & Infra</h3>
-            <div className={styles.tagRow}>
-              <span className={styles.tag}>Node.js</span>
-              <span className={styles.tag}>Express</span>
-              <span className={styles.tag}>PostgreSQL</span>
-              <span className={styles.tag}>MongoDB</span>
-              <span className={styles.tag}>GitHub Actions</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* <section className={styles.section}> */}
+      {/*   <h2 className={styles.h2}>Languages & Stack</h2> */}
+      {/**/}
+      {/*   <div className={styles.tagGroup}> */}
+      {/*     <h3 className={styles.h3}>Languages</h3> */}
+      {/*     <div className={styles.tagRow}> */}
+      {/*       <span className={styles.tagPill}>TypeScript</span> */}
+      {/*       <span className={styles.tagPill}>Python</span> */}
+      {/*       <span className={styles.tagPill}>JavaScript</span> */}
+      {/*       <span className={styles.tagPill}>SQL</span> */}
+      {/*     </div> */}
+      {/*   </div> */}
+      {/**/}
+      {/*   <div className={styles.tagGroup}> */}
+      {/*     <h3 className={styles.h3}>Frontend</h3> */}
+      {/*     <div className={styles.tagRow}> */}
+      {/*       <span className={styles.tagPill}>React</span> */}
+      {/*       <span className={styles.tagPill}>Vite</span> */}
+      {/*       <span className={styles.tagPill}>CSS Modules</span> */}
+      {/*     </div> */}
+      {/*   </div> */}
+      {/**/}
+      {/*   <div className={styles.tagGroup}> */}
+      {/*     <h3 className={styles.h3}>Backend & Infra</h3> */}
+      {/*     <div className={styles.tagRow}> */}
+      {/*       <span className={styles.tagPill}>Node.js</span> */}
+      {/*       <span className={styles.tagPill}>Express</span> */}
+      {/*       <span className={styles.tagPill}>PostgreSQL</span> */}
+      {/*       <span className={styles.tagPill}>MongoDB</span> */}
+      {/*       <span className={styles.tagPill}>GitHub Actions</span> */}
+      {/*     </div> */}
+      {/*   </div> */}
+      {/* </section> */}
 
       {/* GitHub activity */}
       <section className={styles.section}>
