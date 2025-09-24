@@ -11,21 +11,21 @@ const projects: Project[] = [
   {
     title: "Spektra",
     description: "Audio Spectrum Analyzer hosted on the Web",
-    github: "https://github.com/seungkilee-cs/Spektra",
-    demo: "https://www.seungkilee.com/Spektra/",
+    github: "https://github.com/seungkilee-cs/spektra",
+    demo: "https://www.seungkilee.com/spektra/",
   },
   {
     title: "MiniMeet",
     description:
       "Real Time Video Chat Application built with Full Stack TypeScript and WebSocket",
     github: "https://github.com/seungkilee-cs/MiniMeet",
-    demo: "https://github.com/username/weather-lite",
+    demo: "https://github.com/seungkilee-cs/MiniMeet",
   },
   {
     title: "K-Means Image Compression",
     description: "Image compression implemented with K-Means Clustering",
     github: "https://github.com/seungkilee-cs/K-Means-Image-Compression",
-    demo: "https://github.com/seungkilee-cs/MiniMeet",
+    demo: "https://github.com/seungkilee-cs/K-Means-Image-Compression",
   },
   {
     title: "Financial Modeling",
