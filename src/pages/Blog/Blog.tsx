@@ -9,7 +9,7 @@ export function Blog() {
   return (
     <section className={styles.section}>
       <h1 className={styles.title}>Blog</h1>
-      {isDev && <p>Development mode: showing published and draft posts</p>}
+      {isDev && <p>Dev: show both published and draft posts</p>}
 
       <ul className={styles.list}>
         {posts.map((p) => (
