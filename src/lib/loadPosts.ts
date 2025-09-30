@@ -18,7 +18,9 @@ export type Post = PostMeta & {
 };
 
 const modules = import.meta.glob("../../content/blog/*.md", {
-  as: "raw",
+  // as: "raw",
+  query: "?raw",
+  import: "default",
   eager: true,
 });
 
