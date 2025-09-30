@@ -6,7 +6,6 @@ export function About() {
   const [commits, setCommits] = useState<CommitItem[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // CHANGE THIS to the GitHub username to show activity for
   const GITHUB_USERNAME = "seungkilee-cs";
 
   useEffect(() => {

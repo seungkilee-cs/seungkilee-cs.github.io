@@ -1,98 +1,98 @@
 .article {
-  background: var(--panel, #ffffff);
-  border: 1px solid var(--line, #e5e7eb);
-  border-radius: var(--radius, 14px);
-  padding: clamp(1.25rem, 3vw, 2rem);
-  box-shadow: var(--shadow-sm, 0 1px 2px rgba(15, 23, 42, 0.06));
-  display: grid;
-  gap: 1.25rem;
+    background: var(--panel, #ffffff);
+    border: 1px solid var(--line, #e5e7eb);
+    border-radius: var(--radius, 14px);
+    padding: clamp(1.25rem, 3vw, 2rem);
+    box-shadow: var(--shadow-sm, 0 1px 2px rgba(15, 23, 42, 0.06));
+    display: grid;
+    gap: 1.25rem;
 }
 
 .header {
-  display: grid;
-  gap: 0.35rem;
+    display: grid;
+    gap: 0.35rem;
 }
 
 .title {
-  font-family: "Playfair Display", serif;
-  font-size: var(--fs-1, clamp(2.25rem, 5vw, 3rem));
-  line-height: 1.15;
+    font-family: "Playfair Display", serif;
+    font-size: var(--fs-1, clamp(2.25rem, 5vw, 3rem));
+    line-height: 1.15;
 }
 
 .meta {
-  color: var(--muted, #64748b);
-  font-size: 0.95rem;
+    color: var(--muted, #64748b);
+    font-size: 0.95rem;
 }
 
 .content {
-  display: grid;
-  gap: 1rem;
-  line-height: 1.75;
+    display: grid;
+    gap: 1rem;
+    line-height: 1.75;
 }
 
 /* Element-level MD styles via components mapping */
 .mdH1,
 .mdH2,
 .mdH3 {
-  line-height: 1.25;
+    line-height: 1.25;
 }
 .mdH2 {
-  font-size: clamp(1.3rem, 3vw, 1.6rem);
-  margin-top: 1rem;
+    font-size: clamp(1.3rem, 3vw, 1.6rem);
+    margin-top: 1rem;
 }
 .mdH3 {
-  font-size: 1.2rem;
-  margin-top: 0.75rem;
+    font-size: 1.2rem;
+    margin-top: 0.75rem;
 }
 
 .mdP {
-  color: var(--ink, #0f172a);
+    color: var(--ink, #0f172a);
 }
 .mdA {
-  color: var(--accent, #4f46e5);
-  text-decoration: underline;
+    color: var(--accent, #4f46e5);
+    text-decoration: underline;
 }
 .mdCode {
-  background: #f3f4f6;
-  padding: 0.15rem 0.35rem;
-  border-radius: 6px;
+    background: #f3f4f6;
+    padding: 0.15rem 0.35rem;
+    border-radius: 6px;
 }
 .mdPre {
-  background: #0b1020;
-  color: #e5e7eb;
-  padding: 1rem;
-  border-radius: 10px;
-  overflow: auto;
+    background: #0b1020;
+    color: #e5e7eb;
+    padding: 1rem;
+    border-radius: 10px;
+    overflow: auto;
 }
 
 .mdUl,
 .mdOl {
-  padding-left: 1.25rem;
+    padding-left: 1.25rem;
 }
 .mdLi {
-  margin: 0.25rem 0;
+    margin: 0.25rem 0;
 }
 
 .footer {
-  margin-top: 0.25rem;
+    margin-top: 0.25rem;
 }
 
 .back {
-  display: inline-block;
-  color: var(--accent, #4f46e5);
-  border: 1px solid var(--accent, #4f46e5);
-  background: transparent;
-  border-radius: 999px;
-  padding: 0.5rem 0.9rem;
-  font-weight: 600;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    transform 0.15s ease;
+    display: inline-block;
+    color: var(--accent, #4f46e5);
+    border: 1px solid var(--accent, #4f46e5);
+    background: transparent;
+    border-radius: 999px;
+    padding: 0.5rem 0.9rem;
+    font-weight: 600;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.15s ease;
 }
 
 .back:hover {
-  background: var(--accent, #4f46e5);
-  color: var(--accent-ink, #eef2ff);
-  transform: translateY(-1px);
+    background: var(--accent, #4f46e5);
+    color: var(--accent-ink, #eef2ff);
+    transform: translateY(-1px);
 }

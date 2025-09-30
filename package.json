@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "new-post": "bash scripts/new-post.sh"
   },
   "dependencies": {
     "@types/node": "^24.5.2",
