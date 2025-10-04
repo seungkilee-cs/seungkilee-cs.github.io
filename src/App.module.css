@@ -6,7 +6,7 @@
 
 .main {
   padding: var(--pad-lg) var(--pad);
-  max-width: 960px;
+  max-width: min(1120px, 100%);
   margin: 0 auto;
 }
 

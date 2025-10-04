@@ -62,89 +62,45 @@ export function Projects() {
   const gallery = projects.filter((p) => p !== featured);
 
   return (
-    <section className={styles.section} data-label="Work">
-      <h1 className={styles.title}>Projects</h1>
-      <div className={styles.layout}>
-        {featured ? (
-          <article className={styles.heroCard} key={featured.title}>
-            <div
-              className={styles.heroMedia}
-              style={{ backgroundImage: `url(${featured.image})` }}
-              aria-hidden="true"
-            >
-              <span className={styles.heroMediaMask} />
-            </div>
-            <div className={styles.heroBody}>
-              <span className={styles.heroEyebrow}>Featured Project</span>
-              <h2 className={styles.heroTitle}>{featured.title}</h2>
-              <p className={styles.heroDesc}>{featured.description}</p>
-              <ul className={styles.techList}>
-                {featured.tech.map((tech) => (
-                  <li key={tech} className={styles.techChip}>
-                    {tech}
-                  </li>
-                ))}
-              </ul>
-              <div className={styles.heroActions}>
-                <a
-                  className={`${styles.link} ${styles.linkPrimary}`}
-                  href={featured.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Code
-                </a>
-                {featured.demo && (
-                  <a
-                    className={`${styles.link} ${styles.linkGhost}`}
-                    href={featured.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Live Demo
-                  </a>
-                )}
-              </div>
-            </div>
-          </article>
-        ) : null}
-
-        <div className={styles.gallery}>
-          {gallery.map((p) => (
-            <article key={p.title} className={styles.card}>
+    <section className={styles.page}>
+      <div className={styles.wrapper}>
+        <div className={styles.sectionHeader} data-label="Work">
+          <h1 className={styles.title}>Projects</h1>
+        </div>
+        <div className={styles.layout}>
+          {featured ? (
+            <article className={styles.heroCard} key={featured.title}>
               <div
-                className={styles.cardMedia}
-                style={{ backgroundImage: `url(${p.image})` }}
+                className={styles.heroMedia}
+                style={{ backgroundImage: `url(${featured.image})` }}
                 aria-hidden="true"
               >
-                <span className={styles.cardMediaMask} />
+                <span className={styles.heroMediaMask} />
               </div>
-              <div className={styles.cardBody}>
-                <div className={styles.cardHeader}>
-                  <span className={styles.cardEyebrow}>Project</span>
-                  <h2 className={styles.cardTitle}>{p.title}</h2>
-                  <p className={styles.cardDesc}>{p.description}</p>
-                </div>
+              <div className={styles.heroBody}>
+                <span className={styles.heroEyebrow}>Featured Project</span>
+                <h2 className={styles.heroTitle}>{featured.title}</h2>
+                <p className={styles.heroDesc}>{featured.description}</p>
                 <ul className={styles.techList}>
-                  {p.tech.map((tech) => (
+                  {featured.tech.map((tech) => (
                     <li key={tech} className={styles.techChip}>
                       {tech}
                     </li>
                   ))}
                 </ul>
-                <div className={styles.actions}>
+                <div className={styles.heroActions}>
                   <a
                     className={`${styles.link} ${styles.linkPrimary}`}
-                    href={p.github}
+                    href={featured.github}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     View Code
                   </a>
-                  {p.demo && (
+                  {featured.demo && (
                     <a
-                      className={styles.link}
-                      href={p.demo}
+                      className={`${styles.link} ${styles.linkGhost}`}
+                      href={featured.demo}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -154,7 +110,55 @@ export function Projects() {
                 </div>
               </div>
             </article>
-          ))}
+          ) : null}
+
+          <div className={styles.gallery}>
+            {gallery.map((p) => (
+              <article key={p.title} className={styles.card}>
+                <div
+                  className={styles.cardMedia}
+                  style={{ backgroundImage: `url(${p.image})` }}
+                  aria-hidden="true"
+                >
+                  <span className={styles.cardMediaMask} />
+                </div>
+                <div className={styles.cardBody}>
+                  <div className={styles.cardHeader}>
+                    <span className={styles.cardEyebrow}>Project</span>
+                    <h2 className={styles.cardTitle}>{p.title}</h2>
+                    <p className={styles.cardDesc}>{p.description}</p>
+                  </div>
+                  <ul className={styles.techList}>
+                    {p.tech.map((tech) => (
+                      <li key={tech} className={styles.techChip}>
+                        {tech}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className={styles.actions}>
+                    <a
+                      className={`${styles.link} ${styles.linkPrimary}`}
+                      href={p.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View Code
+                    </a>
+                    {p.demo && (
+                      <a
+                        className={styles.link}
+                        href={p.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Live Demo
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

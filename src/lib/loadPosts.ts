@@ -10,6 +10,7 @@ export type PostMeta = {
   tags?: string[];
   categories?: string[];
   draft?: boolean;
+  featured?: boolean;
 };
 
 export type Post = PostMeta & {
@@ -42,6 +43,7 @@ export function getAllPosts(includeDrafts: boolean = false): Post[] {
         : [],
       baseSlug: data.baseSlug ? String(data.baseSlug) : undefined,
       draft: Boolean(data.draft ?? false),
+      featured: Boolean(data.featured ?? false),
     };
 
     if (meta.draft && !includeDrafts) {
