@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import styles from "./About.module.css";
 import { fetchRecentCommits, type CommitItem } from "../../services/github";
+import ghosttyIcon from "../../assets/icons/ghostty.svg";
+import neovimIcon from "../../assets/icons/neovim.svg";
+import zenIcon from "../../assets/icons/zen.svg";
 
 export function About() {
   const [commits, setCommits] = useState<CommitItem[] | null>(null);
@@ -50,7 +53,7 @@ export function About() {
               rel="noopener noreferrer"
               aria-label="Ghostty - download"
             >
-              <img src="/src/assets/icons/ghostty.svg" alt="" className={styles.toolIcon} />
+              <img src={ghosttyIcon} alt="" className={styles.toolIcon} />
               <span className={styles.toolLabel}>
                 <span className={styles.toolType}>Terminal</span>
                 <span className={styles.toolSep}>|</span>
@@ -64,7 +67,7 @@ export function About() {
               rel="noopener noreferrer"
               aria-label="Neovim - download"
             >
-              <img src="/src/assets/icons/neovim.svg" alt="" className={styles.toolIcon} />
+              <img src={neovimIcon} alt="" className={styles.toolIcon} />
               <span className={styles.toolLabel}>
                 <span className={styles.toolType}>Text Editor</span>
                 <span className={styles.toolSep}>|</span>
@@ -78,7 +81,7 @@ export function About() {
               rel="noopener noreferrer"
               aria-label="Zen Browser - download"
             >
-              <img src="/src/assets/icons/zen.svg" alt="" className={styles.toolIcon} />
+              <img src={zenIcon} alt="" className={styles.toolIcon} />
               <span className={styles.toolLabel}>
                 <span className={styles.toolType}>Browser</span>
                 <span className={styles.toolSep}>|</span>
