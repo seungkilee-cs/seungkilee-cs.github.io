@@ -2,7 +2,7 @@ import styles from "./Contact.module.css";
 
 export function Contact() {
   return (
-    <section className={styles.section}>
+    <section className={styles.section} data-label="Connect">
       <h1 className={styles.title}>Contact</h1>
       <p className={styles.lead}>Let's Connect! Reach out anytime.</p>
       <ul className={styles.list}>

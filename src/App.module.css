@@ -5,7 +5,17 @@
 }
 
 .main {
-  padding: 2.5rem 1rem;
+  padding: var(--pad-lg) var(--pad);
   max-width: 960px;
   margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .appShell {
+    grid-template-rows: 64px 1fr;
+  }
+
+  .main {
+    padding: var(--pad);
+  }
 }

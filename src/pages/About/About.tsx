@@ -25,7 +25,7 @@ export function About() {
 
   return (
     <div className={styles.wrapper}>
-      <section className={styles.section}>
+      <section className={styles.section} data-label="Intro">
         <h1 className={styles.title}>Quietly opinionated</h1>
         <p className={styles.lead}>
           Hi, I&apos;m Seung Ki Lee, a Software Engineer and a Writer.
@@ -40,7 +40,7 @@ export function About() {
       </section>
 
       {/* Tools */}
-      <section className={styles.section}>
+      <section className={styles.section} data-label="Toolkit">
         <h2 className={styles.h2}>Current Favorite Tools</h2>
         <div className={styles.toolList}>
           <a
@@ -137,7 +137,7 @@ export function About() {
       {/* </section> */}
 
       {/* GitHub activity */}
-      <section className={styles.section}>
+      <section className={styles.section} data-label="Activity">
         <h2 className={styles.h2}>Recent GitHub Activity</h2>
         {error ? (
           <p className={styles.muted}>{error}</p>

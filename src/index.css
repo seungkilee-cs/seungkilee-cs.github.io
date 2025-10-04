@@ -5,11 +5,14 @@
   --bg: #f9fafb; /* soft gray-white background */
   --panel: #ffffff; /* cards/surfaces */
   --ink: #0f172a; /* near-black text */
-  --muted: #64748b; /* secondary text */
+  --muted: #475569; /* secondary text (improved contrast) */
 
   /* Accent */
-  --accent: #4f46e5; /* indigo */
+  --accent: #4f46e5;
   --accent-ink: #eef2ff;
+  --accent-neutral: #334155;
+  --accent-neutral-ink: #f8fafc;
+  --accent-muted: #e2e8f0;
 
   /* Borders/Shadows */
   --line: #e5e7eb;
@@ -24,8 +27,10 @@
 
   --radius: 14px;
   --radius-sm: 10px;
-  --pad: 1rem;
-  --pad-lg: 2rem;
+  --pad: clamp(1rem, 2vw + 0.5rem, 1.5rem);
+  --pad-lg: clamp(1.5rem, 4vw + 0.5rem, 2.5rem);
+  --section-gap: clamp(1.25rem, 3vw, 1.75rem);
+  --card-pad: clamp(1.1rem, 3vw, 1.6rem);
 }
 
 * {
@@ -70,5 +75,17 @@ img {
   * {
     transition: none !important;
     animation: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --fs-1: clamp(2rem, 8vw, 2.5rem);
+    --fs-2: clamp(1.35rem, 6vw, 1.75rem);
+    --fs-3: 1.125rem;
+  }
+
+  body {
+    line-height: 1.7;
   }
 }
