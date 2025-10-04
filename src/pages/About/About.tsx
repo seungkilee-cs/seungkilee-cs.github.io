@@ -4,6 +4,70 @@ import { fetchRecentCommits, type CommitItem } from "../../services/github";
 import ghosttyIcon from "../../assets/icons/ghostty.svg";
 import neovimIcon from "../../assets/icons/neovim.svg";
 import zenIcon from "../../assets/icons/zen.svg";
+import braveIcon from "../../assets/icons/brave.svg";
+import obsidianIcon from "../../assets/icons/obsidian.svg";
+import zedIcon from "../../assets/icons/Zed_light.svg";
+import youtubeMusicIcon from "../../assets/icons/youtube_music.svg";
+import raycastIcon from "../../assets/icons/raycast.svg";
+
+type FavoriteTool = {
+  name: string;
+  category: string;
+  href: string;
+  icon: string;
+  note?: string;
+};
+
+const favoriteTools: FavoriteTool[] = [
+  {
+    name: "Ghostty",
+    category: "Terminal",
+    href: "https://ghostty.org/",
+    icon: ghosttyIcon,
+  },
+  {
+    name: "Neovim",
+    category: "Editor",
+    href: "https://neovim.io/",
+    icon: neovimIcon,
+  },
+  {
+    name: "Raycast",
+    category: "Launcher",
+    href: "https://www.raycast.com/",
+    icon: raycastIcon,
+  },
+  {
+    name: "Zed",
+    category: "Editor",
+    href: "https://zed.dev/",
+    icon: zedIcon,
+  },
+  {
+    name: "Zen Browser",
+    category: "Browser",
+    href: "https://www.zen-browser.app/",
+    icon: zenIcon,
+  },
+  {
+    name: "Brave",
+    category: "Browser",
+    href: "https://brave.com/",
+    icon: braveIcon,
+  },
+  {
+    name: "Obsidian",
+    category: "Notes",
+    href: "https://obsidian.md/",
+    icon: obsidianIcon,
+  },
+  {
+    name: "YouTube Music",
+    category: "Sound",
+    href: "https://music.youtube.com/",
+    icon: youtubeMusicIcon,
+  },
+];
 
 export function About() {
   const [commits, setCommits] = useState<CommitItem[] | null>(null);
@@ -46,48 +110,25 @@ export function About() {
         <section className={styles.section} data-label="Toolkit">
           <h2 className={styles.h2}>Current Favorite Tools</h2>
           <div className={styles.toolList}>
-            <a
-              className={styles.toolPill}
-              href="https://ghostty.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Ghostty - download"
-            >
-              <img src={ghosttyIcon} alt="" className={styles.toolIcon} />
-              <span className={styles.toolLabel}>
-                <span className={styles.toolType}>Terminal</span>
-                <span className={styles.toolSep}>|</span>
-                <span className={styles.toolName}>Ghostty</span>
-              </span>
-            </a>
-            <a
-              className={styles.toolPill}
-              href="https://neovim.io/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Neovim - download"
-            >
-              <img src={neovimIcon} alt="" className={styles.toolIcon} />
-              <span className={styles.toolLabel}>
-                <span className={styles.toolType}>Text Editor</span>
-                <span className={styles.toolSep}>|</span>
-                <span className={styles.toolName}>Neovim</span>
-              </span>
-            </a>
-            <a
-              className={styles.toolPill}
-              href="https://www.zen-browser.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Zen Browser - download"
-            >
-              <img src={zenIcon} alt="" className={styles.toolIcon} />
-              <span className={styles.toolLabel}>
-                <span className={styles.toolType}>Browser</span>
-                <span className={styles.toolSep}>|</span>
-                <span className={styles.toolName}>Zen</span>
-              </span>
-            </a>
+            {favoriteTools.map((tool) => (
+              <a
+                key={tool.name}
+                className={styles.toolPill}
+                href={tool.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open ${tool.name}`}
+              >
+                <span className={styles.toolIcon} aria-hidden="true">
+                  <img src={tool.icon} alt="" loading="lazy" />
+                </span>
+                <span className={styles.toolLabel}>
+                  <span className={styles.toolType}>{tool.category}</span>
+                  <span className={styles.toolName}>{tool.name}</span>
+                  {/* {tool.note && <span className={styles.toolMeta}>{tool.note}</span>} */}
+                </span>
+              </a>
+            ))}
           </div>
         </section>
 
