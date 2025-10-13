@@ -17,8 +17,24 @@ const projects: Project[] = [
     github: "https://github.com/seungkilee-cs/spektra",
     demo: "https://www.seungkilee.com/spektra/",
     image: "https://opengraph.githubassets.com/1/seungkilee-cs/spektra",
-    tech: ["JavaScript", "Rust", "ReactJS", "Web Audio API", "WebAssembly", "FFT"],
+    tech: [
+      "JavaScript",
+      "Rust",
+      "ReactJS",
+      "Web Audio API",
+      "WebAssembly",
+      "FFT",
+    ],
     featured: true,
+  },
+  {
+    title: "Saku Audio Player",
+    description: "Web Audio Player with 10 Band Parametric EQ Support",
+    github: "https://github.com/seungkilee-cs/saku-audio-player",
+    demo: "https://www.seungkilee.com/saku-audio-player",
+    image:
+      "https://opengraph.githubassets.com/1/seungkilee-cs/saku-audio-player",
+    tech: ["JavaScript", "ReactJS", "Audio Player", "Parametric EQ"],
   },
   {
     title: "MiniMeet",
@@ -35,7 +51,8 @@ const projects: Project[] = [
       "Some interesting financial modeling done in python and TypeScript",
     github: "https://github.com/seungkilee-cs/Financial-Modeling",
     demo: "https://www.seungkilee.com/Financial-Modeling",
-    image: "https://opengraph.githubassets.com/1/seungkilee-cs/Financial-Modeling",
+    image:
+      "https://opengraph.githubassets.com/1/seungkilee-cs/Financial-Modeling",
     tech: ["Python", "TypeScript", "Finance", "Visualization"],
   },
   {
@@ -43,18 +60,10 @@ const projects: Project[] = [
     description: "Image compression implemented with K-Means Clustering",
     github: "https://github.com/seungkilee-cs/K-Means-Image-Compression",
     demo: "https://github.com/seungkilee-cs/K-Means-Image-Compression",
-    image: "https://opengraph.githubassets.com/1/seungkilee-cs/K-Means-Image-Compression",
+    image:
+      "https://opengraph.githubassets.com/1/seungkilee-cs/K-Means-Image-Compression",
     tech: ["c++", "K-Means Clustering", "Image Compression"],
   },
-  {
-    title: "Vinylla Player",
-    description: "Vinly Record Player and Cyberpunk inspired Web Audio Player in pure JS",
-    github: "https://github.com/seungkilee-cs/Vinylla-Player",
-    demo: "https://www.seungkilee.com/Vinylla-Player",
-    image: "https://opengraph.githubassets.com/1/seungkilee-cs/Vinylla-Player",
-    tech: ["JavaScript" ],
-  },
-
 ];
 
 export function Projects() {
